@@ -1,2 +1,2 @@
 # mini-project
-Voice assistance (mini-project)
+Attendance Management System (mini-project)
