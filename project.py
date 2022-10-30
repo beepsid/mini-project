@@ -5,6 +5,7 @@ import csv
 import os
 from datetime import datetime
 
+#assigning path for image folder
 
 path='photos'
 images = []
@@ -17,6 +18,8 @@ for cl in mylist:
     classnames.append(os.path.splitext(cl)[0])
 print(classnames)
 
+#encodings for images
+
 def findencodings(images):
     encodelist = []
     for img in images:
@@ -24,6 +27,8 @@ def findencodings(images):
         encode = face_recognition.face_encodings(img)[0]
         encodelist.append(encode)
     return encodelist
+
+#marking attendance in csv file
 
 def attendance(name):
     with open('attn.csv','r+') as f:
@@ -41,6 +46,8 @@ def attendance(name):
 
 encodelistknown = findencodings(images)
 print('Encoding Completed')
+
+#capturing video and marking faces
 
 cap=cv2.VideoCapture(0)
 
@@ -67,6 +74,8 @@ while True:
             cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,255,0),cv2.FILLED)
             cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
             attendance(name)
+            
+#closing the webcam
 
     cv2.imshow('Webcam',img)
     if cv2.waitKey(1) == ord('q'):
